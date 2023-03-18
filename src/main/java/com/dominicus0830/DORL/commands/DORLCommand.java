@@ -31,6 +31,7 @@ public class DORLCommand implements CommandExecutor {
                 config.set("radius", radius);
                 plugin.saveConfig();
                 sender.sendMessage("반지름이 " + radius + "로 설정되었습니다.");
+                RLn.getInstance().setRadius(radius);
             } else if (args.length == 1 && args[0].equalsIgnoreCase("구역") && sender instanceof Player) {
                 Player player = (Player) sender;
                 Location location = player.getLocation();
@@ -40,8 +41,7 @@ public class DORLCommand implements CommandExecutor {
                 config.set("center.x", x);
                 config.set("center.y", y);
                 config.set("center.z", z);
-                //RLn.setCenter(player.getLocation());
-
+                RLn.getInstance().setCenter(location);
                 plugin.saveConfig();
                 sender.sendMessage("구역 좌표가 (" + x + ", " + y + ", " + z + ")로 설정되었습니다.");
             } else {
