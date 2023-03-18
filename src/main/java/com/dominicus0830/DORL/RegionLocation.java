@@ -7,8 +7,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class RegionLocation extends JavaPlugin {
 
+    private static RegionLocation  plugin;
+
     private int radius;
     private Location center;
+
+    public static RegionLocation getInstance(){return plugin;}
 
     @Override
     public void onEnable() {
