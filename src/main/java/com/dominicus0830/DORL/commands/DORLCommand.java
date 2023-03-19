@@ -1,15 +1,18 @@
 package com.dominicus0830.DORL.commands;
 
 import com.dominicus0830.DORL.RegionLocation;
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.util.StringUtil;
 
-public class DORLCommand implements CommandExecutor {
+import java.util.ArrayList;
+import java.util.List;
+
+public class DORLCommand implements CommandExecutor, TabCompleter {
 
     private final Plugin plugin;
     private final FileConfiguration config;
@@ -32,18 +35,7 @@ public class DORLCommand implements CommandExecutor {
                 plugin.saveConfig();
                 sender.sendMessage("반지름이 " + radius + "로 설정되었습니다.");
                 RLn.getInstance().setRadius(radius);
-            } else if (args.length == 1 && args[0].equalsIgnoreCase("구역") && sender instanceof Player) {
-                Player player = (Player) sender;
-                Location location = player.getLocation();
-                int x = location.getBlockX();
-                int y = location.getBlockY();
-                int z = location.getBlockZ();
-                config.set("center.x", x);
-                config.set("center.y", y);
-                config.set("center.z", z);
-                RLn.getInstance().setCenter(location);
-                plugin.saveConfig();
-                sender.sendMessage("구역 좌표가 (" + x + ", " + y + ", " + z + ")로 설정되었습니다.");
+
             } else {
                 sender.sendMessage("잘못된 명령어입니다.");
             }
@@ -52,5 +44,32 @@ public class DORLCommand implements CommandExecutor {
         return false;
     }
 
-}
+    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+        List<String> aaaaaa = new ArrayList<>();
+        List<String> commands = new ArrayList<>();
 
+        if (args.length == 1) {
+            commands.add("반지름");
+
+            StringUtil.copyPartialMatches(args[0], commands, aaaaaa);
+        } else if (args.length == 2) {
+            if (args[0].equalsIgnoreCase("반지름")) {
+                commands.add("원하는 숫자 전부 가능");
+                commands.add("1");
+                commands.add("2");
+                commands.add("3");
+                commands.add("4");
+                commands.add("5");
+                commands.add("10");
+                commands.add("50");
+                commands.add("100");
+                commands.add("250");
+                commands.add("500");
+                StringUtil.copyPartialMatches(args[1], commands, aaaaaa);
+            }
+        }
+
+        return aaaaaa;
+    }
+
+}

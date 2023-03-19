@@ -1,10 +1,11 @@
 name: DORLPlugin
 version: 1.0
-description: A plugin for managing DORL region
+description: LIP 커뮤니티 플러그인
 author: [ Dominicus0830 ]
 
 main: com.dominicus0830.DORL.RegionLocation
 commands:
-  DORL: # 명령어 이름
-    description: Set the center and radius of DORL region # 명령어 설명
-    usage: /DORL <radius> | /DORL region # 명령어 사용법
+  DORL:
+    description: 반지름 설정
+    usage: /DORL <radius> 명령어 사용법
+    tab-completer: com.dominicus0830.DORL.commands.DORLCommand
