@@ -35,7 +35,7 @@ public class DORLEvent implements Listener {
                 continue;
             }
             if (p.getLocation().distance(deathLocation) <= radius) {
-                if (killer instanceof Player) {//English
+                if (killer instanceof Player) {
                     p.sendMessage(ChatColor.RED + player.getName() + " was kill by " + killer.getName());
                 } else {
                     p.sendMessage(ChatColor.RED + player.getName() + "was died.");
